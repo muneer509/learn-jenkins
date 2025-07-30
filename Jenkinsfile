@@ -1,56 +1,84 @@
-Here’s a simple example of a Jenkins Pipeline script written in Groovy. This script demonstrates a basic CI/CD pipeline with stages for building, testing, and deploying an application:
-
-Copy code
 pipeline {
-    agent any
+    agent {
+        label 'AGENT-1'
+    }
+    options{
+        timeout(time: 10, unit: 'MINUTES')
+        disableConcurrentBuilds()
+        //retry(1)
+    }
+    environment {
+        DEBUG = 'true'
+    }
 
+    parameters {
+        string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+        text(name: 'BIOGRAPHY', defaultValue: '', description: 'Enter some information about the person')
+
+        booleanParam(name: 'TOGGLE', defaultValue: true, description: 'Toggle this value')
+
+        choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
+
+        password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
+    }
     stages {
-        stage('Checkout') {
-            steps {
-                echo 'Checking out code...'
-                checkout scm
-            }
-        }
-
         stage('Build') {
             steps {
-                echo 'Building the application...'
-                sh './gradlew build' // Replace with your build command
+                sh 'echo This is Build'
+                //sh 'sleep 10'
             }
         }
-
         stage('Test') {
             steps {
-                echo 'Running tests...'
-                sh './gradlew test' // Replace with your test command
+                sh 'echo This is test'
+                sh 'env'
             }
         }
-
         stage('Deploy') {
+            when {
+                expression { env.GIT_BRANCH != "origin/main" }
+            }
             steps {
-                echo 'Deploying the application...'
-                sh './deploy.sh' // Replace with your deployment script
+
+                    sh 'echo This is deploy'
+                    //error 'pipeline failed'
+
             }
         }
+        stage('Print Params'){
+            steps{
+                echo "Hello ${params.PERSON}"
+                echo "Biography: ${params.BIOGRAPHY}"
+                echo "Toggle: ${params.TOGGLE}"
+                echo "Choice: ${params.CHOICE}"
+                echo "Password: ${params.PASSWORD}"  
+            }
+        }
+        // stage('Approval'){
+        //     input {
+        //         message "Should we continue?"
+        //         ok "Yes, we should."
+        //         submitter "alice,bob"
+        //         parameters {
+        //             string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+        //         }
+        //     }
+        //     steps {
+        //         echo "Hello, ${PERSON}, nice to meet you."
+        //     }
+        // }
     }
 
     post {
-        always {
-            echo 'Cleaning up workspace...'
-            cleanWs()
+        always{
+            echo "This sections runs always"
+            deleteDir()
         }
-        success {
-            echo 'Pipeline completed successfully!'
+        success{
+            echo "This section run when pipeline success"
         }
-        failure {
-            echo 'Pipeline failed. Please check the logs.'
+        failure{
+            echo "This section run when pipeline failure"
         }
     }
 }
-
-Key Points:
-agent any: Specifies that the pipeline can run on any available Jenkins agent.
-Stages: Each stage represents a step in the pipeline (e.g., Checkout, Build, Test, Deploy).
-Post Actions: Defines actions to perform after the pipeline execution (e.g., cleanup, success, failure notifications).
-
-You can customize this script based on your project’s requirements, such as using different build tools, test frameworks, or deployment strategies.
