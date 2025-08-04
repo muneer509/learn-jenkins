@@ -24,6 +24,7 @@ pipeline {
 post {
     always{
         echo  "This sections runs allways"
+        deleteDir() // Deletes workspace contents
     }
     success{
         echo "This section run when pipeline sucess"
