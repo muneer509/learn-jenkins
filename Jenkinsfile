@@ -29,7 +29,9 @@ pipeline {
             //     error 'pipeline failed'
             //   }
         }
-}
+    }
+    }
+
 post {
     always{
         echo "This section runs always"
@@ -41,5 +43,4 @@ post {
         echo "failure"
     }
 }
-        }
-}
+    }
