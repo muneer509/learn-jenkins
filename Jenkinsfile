@@ -5,8 +5,8 @@ pipeline {
             steps {
               steps{
                 
-            sh "echo Hello Muneer"
-                "echo This is build stage"
+            sh "echo Hello Build"
+                // "echo This is build stage"
               }
         }
 
@@ -14,8 +14,8 @@ pipeline {
             steps {
               steps{
                 
-            sh "echo Hello Muneer"
-                "echo This is test stage"
+            sh "echo Hello test"
+                // "echo This is test stage"
               }
         }
     }
@@ -24,8 +24,8 @@ pipeline {
             steps {
               steps{
                 
-            sh "echo Hello Muneer"
-                "echo This is Deploy stage"
+            sh "echo Hello deploy"
+                // "echo This is Deploy stage"
               }
         }
 }
