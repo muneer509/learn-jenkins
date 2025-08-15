@@ -5,7 +5,7 @@ pipeline {
            
               steps{
                 
-            sh "echo Hello Build"
+            sh 'echo Hello Build'
                 // "echo This is build stage"
               }
         }
@@ -14,7 +14,7 @@ pipeline {
         
               steps{
                 
-            sh "echo Hello test"
+            sh 'echo Hello test'
                 // "echo This is test stage"
               }
         }
@@ -24,7 +24,7 @@ pipeline {
             
               steps{
                 
-            sh "echo Hello deploy"
+            sh 'echo Hello deploy'
                 // "echo This is Deploy stage"
               }
         }
