@@ -37,12 +37,7 @@ pipeline {
 post {
     always{
         echo "This section runs always"
-        
-          script {
-                // Delete the current build
-                def job = Jenkins.instance.getItemByFullName(env.JOB_NAME)
-                job.getBuildByNumber(env.BUILD_NUMBER)?.delete()
-            }
+        DeleteDir()
 
     }
     success{
