@@ -7,7 +7,7 @@ pipeline {
            
               steps{
                 
-            bat 'echo Hello Build'
+            sh 'echo Hello Build'
                 // "echo This is build stage"
               }
         }
@@ -16,7 +16,7 @@ pipeline {
         
               steps{
                 
-            bat 'echo Hello test'
+            sh 'echo Hello test'
                 // "echo This is test stage"
               }
         }
@@ -26,7 +26,7 @@ pipeline {
             
               steps{
                 
-            bat 'echo Hello deploy'
+            sh 'echo Hello deploy'
                 // "echo This is Deploy stage"
             //     error 'pipeline failed'
             //   }
