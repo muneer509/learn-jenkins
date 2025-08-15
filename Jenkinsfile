@@ -34,6 +34,12 @@ pipeline {
               }
         }
     
+stage('Approval') {
+            steps {
+                input message: 'Do you want to proceed?', ok: 'Yes'
+            }
+        }
+
 
     stage('Deploy') {
             
