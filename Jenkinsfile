@@ -26,6 +26,7 @@ pipeline {
                 
             bat 'echo Hello deploy'
                 // "echo This is Deploy stage"
+                error 'pipeline failed'
               }
         }
 }
