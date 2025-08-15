@@ -1,56 +1,31 @@
 pipeline {
-    agent {
-        label 'AGENT-1'
-    }
-    //  
-    parameters {
-        string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-        text(name: 'BIOGRAPHY', defaultValue: '', description: 'Enter some information about the person')
-
-        booleanParam(name: 'TOGGLE', defaultValue: true, description: 'Toggle this value')
-
-        choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
-
-        password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
-    }
+    agent any
     stages {
         stage('Build') {
             steps {
-                sh 'echo This is Build'
-                sh 'sleep 10'
-            }
+              steps{
+                
+            sh "echo Hello Muneer"
+                "echo This is build stage"
+              }
         }
-        stage('Test') {
+
+        stage('test') {
             steps {
-                sh 'echo This is Test'
-            }
+              steps{
+                
+            sh "echo Hello Muneer"
+                "echo This is test stage"
+              }
         }
-        stage('Deploy') {
+    }
+
+    stage('Deploy') {
             steps {
-                sh ' echo This is Deploy'
-                // error 'Pipeline failed'
-            }
+              steps{
+                
+            sh "echo Hello Muneer"
+                "echo This is Deploy stage"
+              }
         }
-        stage('Print Params'){
-            steps{
-                echo "Hello ${params.PERSON}"
-                echo "Biography: ${params.BIOGRAPHY}"
-                echo "Toggle: ${params.TOGGLE}"
-                echo "Choice: ${params.CHOICE}"
-                echo "Password: ${params.PASSWORD}"  
-            }
-        }
-    }
-}
-post {
-    always{
-        echo  "This sections runs allways"
-        deleteDir() // Deletes workspace contents
-    }
-    success{
-        echo "This section run when pipeline sucess"
-    }
-    failure{
-        echo "This section runs when pipeline failure"
-    }
 }
