@@ -2,11 +2,7 @@ pipeline {
     agent {
         label 'AGENT-1'
     }
-    // options{
-    //     timeout(time: 5, unit: 'SECONDS')
-    //     disabledConcurrentBuilds()
-    //     retry(3)
-    // }
+    //  
     parameters {
         string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
         text(name: 'BIOGRAPHY', defaultValue: '', description: 'Enter some information about the person')
