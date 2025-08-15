@@ -3,7 +3,8 @@ pipeline {
         label 'A1'
     }
     options{
-        timeout(time: 1, unit: 'SECONDS')
+        timeout(time: 60, unit: 'SECONDS')
+        disabledConcurentBuilds()
     }
     stages {
         stage('Build') {
